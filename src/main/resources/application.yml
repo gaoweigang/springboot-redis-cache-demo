@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: dev
+
+
+---
+#单节点配置
+spring:
+  profiles: dev
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  cache:
+    type: redis
+    cache-names: base
+
+
+---
+#集群配置
+spring:
+  profiles : test
+  redis:
+    cluster:
+        nodes: 127.0.0.1:6379
+  cache:
+      type: redis
+      cache-names: base
+
+---
+##哨兵配置
+spring:
+  profiles : pro
+  redis:
+    sentinel:
+      master: sentinel
+      nodes: 192.168.6.101:6384,192.168.6.102:6383
+  cache:
+    type: redis
+    cache-names: base
+      
